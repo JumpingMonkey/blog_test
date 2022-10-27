@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class PostRequest extends FormRequest
 {
@@ -27,7 +28,7 @@ class PostRequest extends FormRequest
             'title' => 'required|string|min:5',
             'content' => 'required|string',
             'published_date' => '',
-            'status' => '',
+            'status' => Rule::in([true, false]),
         ];
     }
 }
