@@ -37,4 +37,21 @@ class UserFactory extends Factory
             'email_verified_at' => null,
         ]);
     }
+
+    /**
+     * Indicate that the user is suspended.
+     *
+     * @return \Illuminate\Database\Eloquent\Factories\Factory
+     */
+    public function admin()
+    {
+        return $this->state(function (array $attributes) {
+            return [
+                'name' => 'Jonny Doe',
+                'email' => 'test@mail',
+                'password' => '$2y$10$5Qz0XGPkDLpS0YvfQCdDCOT/y9oAibb80y.JnxdRZZUpRwZb5jw2O',
+                'is_admin' => true,
+            ];
+        });
+    }
 }
