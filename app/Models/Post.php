@@ -15,4 +15,9 @@ class Post extends Model
         'published_date',
         'status',
     ];
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class);
+    }
 }
