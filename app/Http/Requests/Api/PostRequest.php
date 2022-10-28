@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Api;
 
+use App\Models\Category;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -24,11 +25,14 @@ class PostRequest extends FormRequest
      */
     public function rules()
     {
+        $categoryIds = Category::all('id')->pluck('id')->toArray();
+
         return [
             'title' => 'required|string|min:5',
             'content' => 'required|string',
-            'published_date' => '',
+            'published_date' => 'date',
             'status' => Rule::in([true, false]),
+            'category_id' => 'integer|required', Rule::in($categoryIds),
         ];
     }
 }
