@@ -93,9 +93,9 @@ class CategoryController extends BaseController
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Post $post)
+    public function destroy(Category $category)
     {
-        $post->delete();
-        return $this->sendResponse('post was deleted');
+        $category->delete();
+        return $this->sendResponse('category was deleted');
     }
 }
