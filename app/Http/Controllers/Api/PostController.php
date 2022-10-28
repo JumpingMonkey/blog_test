@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Requests\Api\PostRequest;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class PostController extends BaseController
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -16,7 +18,7 @@ class PostController extends BaseController
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::with('categories')->get();
         if (count($posts) < 1){
             $posts = 'No posts available';
         }
@@ -34,7 +36,11 @@ class PostController extends BaseController
         $validated = $request->validated();
         $post = new Post();
         $post = $post->create($validated);
-
+        if ($request->category_id){
+            $category = Category::find($request->category_id);
+            $post->categories()->attach($category);
+        }
+        $post->categories;
         return $this->sendResponse($post);
     }
 
@@ -46,7 +52,7 @@ class PostController extends BaseController
      */
     public function show(Post $post)
     {
-        return $this->sendResponse($post);
+        return $this->sendResponse($post->with('categories')->findOrFail());
     }
 
     /**
@@ -61,15 +67,18 @@ class PostController extends BaseController
         $post = Post::findOrFail($post->id);
         $validated = $request->validated();
         $post->fill($validated);
+        $post->categories()->sync($request->category_id);
         $post->save();
+        $post->categories;
+
         return $this->sendResponse($post);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Post $post
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Post $post)
     {
