@@ -25,7 +25,7 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|min:5',
+            'name' => 'required|string|min:5',
             'status' => Rule::in([true, false]),
         ];
     }
