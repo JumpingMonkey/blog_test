@@ -3,7 +3,7 @@
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\PostController;
 use App\Http\Controllers\Api\RegisterController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,8 +23,11 @@ Route::controller(RegisterController::class)->group(function(){
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::apiResource('/posts', PostController::class);
-    Route::apiResource('/categories', CategoryController::class);
+    Route::apiResources([
+        '/users'=> UserController::class,
+        '/posts'=> PostController::class,
+        '/categories' => CategoryController::class,
+    ]);
 });
 
 
