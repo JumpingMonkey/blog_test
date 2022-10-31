@@ -47,7 +47,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials, $request->filled('remember'))) {
             $request->session()->regenerate();
-
+            $request->session()->flash('status', 'The login was complete!');
             return redirect()->intended('admin-panel');
         }
 

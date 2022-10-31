@@ -10,7 +10,7 @@
         @if(isset($label))
             {{$label}}
         @else
-            Добавить запись
+            Add Post
         @endif
     </a>
     <table class="table">
