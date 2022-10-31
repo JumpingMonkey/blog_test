@@ -18,7 +18,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
+Route::get('/', function (){
+    return redirect('/login');
+});
 Route::middleware('auth')->group(function (){
     Route::get('/api-doc', function () {
         return view('api');
@@ -29,14 +31,6 @@ Route::middleware('auth')->group(function (){
 
     Route::resource('/posts', PostController::class);
 });
-
-
-
-Route::get('/', function (){
-   return redirect('/login');
-});
-
-
 
 Route::controller(LoginController::class)->group(function (){
     Route::get('/login', 'showLoginForm')->name('auth.showLoginForm');
