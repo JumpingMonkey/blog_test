@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\HomeController;
@@ -25,6 +26,8 @@ Route::middleware('auth')->group(function (){
 
     Route::get('/admin-panel', [HomeController::class, 'home'])
         ->name('home.index');
+
+    Route::resource('/posts', PostController::class);
 });
 
 

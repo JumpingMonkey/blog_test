@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title', 255);
             $table->text('content');
             $table->timestamp('published_date');
-            $table->boolean('status');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

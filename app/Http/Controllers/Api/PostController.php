@@ -34,8 +34,10 @@ class PostController extends BaseController
     public function store(PostRequest $request)
     {
         $validated = $request->validated();
+        $validated['user_id'] = $request->user()->id;
         $post = new Post();
         $post = $post->create($validated);
+
         if ($request->category_id){
             $category = Category::find($request->category_id);
             $post->categories()->attach($category);
