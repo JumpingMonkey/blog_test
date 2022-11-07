@@ -124,6 +124,6 @@ class PostController extends Controller
 
         session()->flash('status', 'Post was deleted!');
 
-        return redirect()->route('posts.index', ['posts' => Post::all()]);
+        return redirect()->route('posts.index', ['posts' => Post::paginate(10)]);
     }
 }
