@@ -29,26 +29,16 @@
                 <th scope="row">{{ $post->id }}</th>
                 <td><a href="{{ route('posts.show', ['post' => $post->id]) }}">{{ $post->title }}</a></td>
                 <td>{{ $post->categories->first()->name ?? 'no category' }}</td>
-                <td>{{ $post->status == 1 ? "Active" : "Inactive" }}</td>
                 <td>
-                    <div class="d-flex">
-                        <div class="pr-1 pb-1">
-                            <a
-                                class="btn btn-outline-warning"
-                                href="{{route('posts.edit', ['post' => $post])}}"
-                                title="Редактировать"
-                            > Edit
-                                <i class="fas fa-pencil-alt"></i>
-                            </a>
-                        </div>
-                        <div class="pr-1 pb-1">
-                            <form class="d-inline" method="POST" action="{{ route('posts.destroy', ['post' => $post->id]) }}">
-                                @csrf
-                                @method('DELETE')
-                                <input class="btn btn-outline-danger" type="submit" value="Delete!">
-                            </form>
-                        </div>
-                    </div>
+                    @component('components.status', ['object' => $post])
+                    @endcomponent
+                </td>
+                <td>
+                    @component('components.buttons',[
+                        'routeObject' => 'posts',
+                        'objectName' => 'post',     
+                        'object' => $post])
+                    @endcomponent
                 </td>
             </tr>
         @empty

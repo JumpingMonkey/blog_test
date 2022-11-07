@@ -11,6 +11,9 @@
     </h1>
     <p>{{$post->content}}</p>
 
+    @component('components.status', ['object' => $post])
+    @endcomponent
+
     @component('components.updated', ['date' => $post->created_at, 'name' => $post->user->name])
 
     @endcomponent
@@ -19,6 +22,10 @@
         Updated
     @endcomponent
 
-
+    @component('components.buttons',[
+                            'routeObject' => 'posts',
+                            'objectName' => 'post',
+                            'object' => $post])
+    @endcomponent
 
 @endsection
