@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\PostController;
+use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\HomeController;
@@ -30,6 +31,7 @@ Route::middleware('auth')->group(function (){
         ->name('home.index');
 
     Route::resource('/posts', PostController::class);
+    Route::resource('/categories', CategoryController::class);
 });
 
 Route::controller(LoginController::class)->group(function (){
