@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Admin\HomeController;
@@ -32,6 +33,7 @@ Route::middleware('auth')->group(function (){
 
     Route::resource('/posts', PostController::class);
     Route::resource('/categories', CategoryController::class);
+    Route::resource('/users', UserController::class);
 });
 
 Route::controller(LoginController::class)->group(function (){
